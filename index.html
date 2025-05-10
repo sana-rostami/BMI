@@ -1,0 +1,68 @@
+<html lang="en2fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="main.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Rubik:ital,wght@0,300..900;1,300..900&family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+
+    <title>Document</title>
+</head>
+<body>
+  <div class="container">
+  <div class="title">
+    <div class="line"></div>
+    <div class="maintitle">محاسبه BMI , شاخص توده بدنی</div>
+    <div class="line"></div>
+  </div>
+  <div class="main">
+    <div class="height">
+  <label for="height" style="color:#066">قد ( سانتیمتر )</label>
+  <input type="number" id="height" placeholder="مثال:170">
+</div>
+<div class="weight">
+  <label for="weight" style="color:#066">وزن ( کیلوگرم )</label>
+    <input type="number" id="weight" placeholder="مثال:65">
+  </div>
+</div>
+  </div>
+  <div class="first"><div class="second"><div id="result"></div><div id="situation"></div></div></div>
+  </div>
+<script>
+
+    let weight = document.querySelector("#weight");
+    let height = document.querySelector("#height");
+    let result = document.querySelector("#result");
+    let sit = document.querySelector("#situation");
+
+    function calculateBMI(){
+    let weightValue = Number(weight.value);
+    let heightValue =  Number(height.value)/100;
+if ((heightValue) <= 0  || (weightValue) <= 0) {
+          result.textContent = "لطفا مقادیر را به درستی وارد کنید!";
+            result.classList.add("error");
+        } else{
+          let BMI = weightValue / (heightValue*heightValue)
+          result.textContent = "BMI : "+BMI.toFixed(2);
+          result.classList.remove("error");
+          if(BMI > 30){
+            sit.textContent ="وضعیت : چاقی"
+          }
+          else if(29.9>BMI && BMI>25){
+            sit.textContent =" وضعیت : اضافه وزن"
+
+          }
+          else if(24.5>BMI && BMI>18.5){
+            sit.textContent ="وضعیت : وزن سلامت"
+          }
+          else{
+            sit.textContent ="وضعیت : کمبود وزن"
+          }
+        }
+  }
+  weight.addEventListener("input",calculateBMI);
+  height.addEventListener("input",calculateBMI);
+</script>
+</body>
+</html>
